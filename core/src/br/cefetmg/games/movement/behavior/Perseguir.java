@@ -24,7 +24,11 @@ public class Perseguir extends Algoritmo {
     @Override
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
-
+        //public Vector3 vetor;
+        
+        Vector3 vetor = alvo.getObjetivo().cpy();
+        output.velocidade = vetor.sub(agente.posicao).nor().setLength(maxVelocidade);
+         
         // Calcula a direção para onde o agente deve ir
         // Input: a posicao do objetivo (this.alvo) e deste agente
         // ..
