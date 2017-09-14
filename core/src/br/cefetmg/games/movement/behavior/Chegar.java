@@ -26,7 +26,7 @@ public class Chegar extends AlgoritmoMovimentacao {
     }
 
     @Override
-    public Direcionamento guiar(Pose agente) {
+    public Direcionamento guiar(Pose agente) { //TO-DO: Invocar Chegar 
         Direcionamento output = new Direcionamento();
 
         output.velocidade = super.alvo.getObjetivo().sub(agente.posicao);
