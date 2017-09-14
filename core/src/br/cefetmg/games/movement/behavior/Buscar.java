@@ -27,6 +27,9 @@ public class Buscar extends AlgoritmoMovimentacao {
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
 
+        output.velocidade = super.alvo.getObjetivo().sub(agente.posicao);
+        output.velocidade.nor();
+        output.velocidade.mulAdd(output.velocidade, this.maxVelocidade);
         // calcula que direção tomar (configura um objeto Direcionamento 
         // e o retorna)
         // ...

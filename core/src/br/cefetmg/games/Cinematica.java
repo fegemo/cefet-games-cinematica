@@ -204,7 +204,7 @@ public class Cinematica extends ApplicationAdapter {
     }
 
     /**
-     * Percorre a lista de agentes, atualiando sua lógica de movimentação.
+     * Percorre a lista de agentes, atualizando sua lógica de movimentação.
      *
      * @param delta tempo desde a última atualização.
      */
