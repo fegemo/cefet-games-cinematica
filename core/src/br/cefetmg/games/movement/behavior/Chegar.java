@@ -15,14 +15,15 @@ public class Chegar extends AlgoritmoMovimentacao {
 
     private static final char NOME = 'c';
     private static final double radius = 0.25;
-    private static final float timeToTarget = 1/4;  
+    private static final float timeToTarget = 2;  
 
-    public Chegar() {
-        this(NOME);
+    public Chegar(float maxVelocidade) {
+        this(NOME, maxVelocidade);
     }
 
-    protected Chegar(char nome) {
+    protected Chegar(char nome, float maxVelocidade) {
         super(nome);
+        this.maxVelocidade = maxVelocidade;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Fugir extends AlgoritmoMovimentacao {
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
 
-        output.velocidade = super.alvo.getObjetivo().sub(agente.posicao); // TO-DO: clonar o vetor super.alvo
+        output.velocidade = super.alvo.getObjetivo().sub(agente.posicao);
         output.velocidade.nor();
         output.velocidade.mulAdd(output.velocidade, -this.maxVelocidade);
         

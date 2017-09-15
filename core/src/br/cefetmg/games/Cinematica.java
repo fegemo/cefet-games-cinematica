@@ -75,7 +75,8 @@ public class Cinematica extends ApplicationAdapter
         vagar = new Vagar(40, 2);
         fugir = new Fugir(40);
         fugir.alvo = buscar.alvo;
-        chegar = new Chegar();
+        chegar = new Chegar(40);
+        chegar.alvo = fugir.alvo;
         algoritmos.add(buscar);
         algoritmos.add(vagar);
         algoritmos.add(fugir);
@@ -86,7 +87,7 @@ public class Cinematica extends ApplicationAdapter
 
         agentes = new Array<>();
         Agente agente = novoAgente(posicaoAleatoria());
-        agente.defineComportamento(buscar);
+        agente.defineComportamento(chegar);
         novoAgente(posicaoAleatoria());
         novoAgente(posicaoAleatoria());
         novoAgente(posicaoAleatoria());
