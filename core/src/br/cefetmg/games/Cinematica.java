@@ -271,8 +271,8 @@ public class Cinematica extends ApplicationAdapter
                         (float) Math.random(),
                         (float) Math.random(), 1));
         agente.pose.orientacao = (float) (Math.random() * Math.PI * 2);
-        //agente.defineComportamento(algoritmoCorrente);
-        agente.defineComportamento(algoritmos.random());
+        agente.defineComportamento(algoritmoCorrente);
+        //agente.defineComportamento(algoritmos.random());
 
         agentes.add(agente);
         return agente;
