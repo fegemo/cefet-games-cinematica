@@ -15,18 +15,20 @@ import br.cefetmg.games.movement.behavior.Buscar;
 public class Fugir extends AlgoritmoMovimentacao {
 
     private static final char NOME = 'f';
+    private final float maxVelocidade;
 
     public Fugir(float maxVelocidade) {
         super(NOME);
+        this.maxVelocidade = maxVelocidade;
     }
 
     @Override
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
 
-        output.velocidade = super.alvo.getObjetivo().sub(agente.posicao);
+        output.velocidade = agente.posicao.cpy().sub(super.alvo.getObjetivo());
         output.velocidade.nor();
-        output.velocidade.mulAdd(output.velocidade, -this.maxVelocidade);
+        output.velocidade.mulAdd(output.velocidade, this.maxVelocidade);
         
         agente.olharNaDirecaoDaVelocidade(output.velocidade);
         output.rotacao = 0;

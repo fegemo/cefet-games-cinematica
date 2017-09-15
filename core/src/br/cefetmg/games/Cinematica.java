@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Classe principal do programa.
@@ -265,13 +266,16 @@ public class Cinematica extends ApplicationAdapter
      */
     public Agente novoAgente(Vector3 posicao)
     {
+        Random generator = new Random();
+        
         Agente agente = new Agente(posicao,
                 new Color(
                         (float) Math.random(),
                         (float) Math.random(),
                         (float) Math.random(), 1));
         agente.pose.orientacao = (float) (Math.random() * Math.PI * 2);
-        agente.defineComportamento(algoritmoCorrente);
+        //agente.defineComportamento(algoritmoCorrente);
+        agente.defineComportamento(algoritmos.get((generator.nextInt(4))));
 
         agentes.add(agente);
         return agente;
