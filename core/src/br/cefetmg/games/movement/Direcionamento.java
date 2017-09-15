@@ -1,5 +1,6 @@
 package br.cefetmg.games.movement;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 /**
@@ -17,5 +18,10 @@ public class Direcionamento {
     public Direcionamento() {
         velocidade = new Vector3();
         rotacao = 0;
+    }
+
+    public Direcionamento(float vx, float vy, float rotacao) {
+        this.velocidade = new Vector3(vx, vy, 0);
+        this.rotacao = rotacao;
     }
 }

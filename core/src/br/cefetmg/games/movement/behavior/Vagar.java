@@ -24,10 +24,16 @@ public class Vagar extends AlgoritmoMovimentacao {
         maxVelocidade = tangencial;
         maxAngular = angular;
     }
+    
+    public float randomBinomial() {
+        return (float)(Math.random() - Math.random());
+    }
 
     @Override
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
+        output.velocidade = agente.getOrientacaoComoVetor().scl(maxVelocidade);
+        output.rotacao = randomBinomial() * maxAngular;
 
         // calcula que direção tomar (configura um objeto Direcionamento 
         // e o retorna)
