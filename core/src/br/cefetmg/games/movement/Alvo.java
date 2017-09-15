@@ -24,6 +24,11 @@ public class Alvo {
         this.objetivoEstatico = posicao;
     }
 
+    public Alvo(Vector3 posicao, Agente agenteObjetivo) {
+        this.objetivoEstatico = posicao;
+        this.agenteObjetivo = agenteObjetivo;
+    }
+
     public void setObjetivo(Vector3 posicao) {
         this.objetivoEstatico = posicao;
         this.agenteObjetivo = null;
@@ -39,7 +44,7 @@ public class Alvo {
     }
 
     public Vector3 getObjetivo() {
-        return isSeguindoObjetivo()
-                ? agenteObjetivo.pose.posicao : objetivoEstatico;
+        return (isSeguindoObjetivo()
+                ? agenteObjetivo.pose.posicao : objetivoEstatico).cpy();
     }
 }

@@ -1,6 +1,7 @@
 package br.cefetmg.games.movement.behavior;
 
 import br.cefetmg.games.movement.AlgoritmoMovimentacao;
+import br.cefetmg.games.movement.Alvo;
 import br.cefetmg.games.movement.Direcionamento;
 import br.cefetmg.games.movement.Pose;
 import com.badlogic.gdx.Input.Keys;

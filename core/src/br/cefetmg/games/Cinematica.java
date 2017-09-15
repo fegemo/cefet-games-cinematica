@@ -30,7 +30,8 @@ import java.util.Iterator;
  *
  * @author Flávio Coutinho <fegemo@cefetmg.br>
  */
-public class Cinematica extends ApplicationAdapter {
+public class Cinematica extends ApplicationAdapter
+{
 
     private Viewport viewport;
     private OrthographicCamera camera;
@@ -52,7 +53,8 @@ public class Cinematica extends ApplicationAdapter {
     private static final float FATOR_ZOOM_A_CADA_SCROLL = 20.0f;
 
     @Override
-    public void create() {
+    public void create()
+    {
         // configura a janela e elementos gráficos
         camera = new OrthographicCamera(
                 Gdx.graphics.getWidth(),
@@ -90,9 +92,11 @@ public class Cinematica extends ApplicationAdapter {
         novoAgente(posicaoAleatoria());
 
         // escuta por eventos de interação
-        Gdx.input.setInputProcessor(new InputAdapter() {
+        Gdx.input.setInputProcessor(new InputAdapter()
+        {
             @Override
-            public boolean touchDown(int x, int y, int pointer, int button) {
+            public boolean touchDown(int x, int y, int pointer, int button)
+            {
                 Vector3 clique = new Vector3(x, y, 0);
                 viewport.unproject(clique);
 
@@ -113,26 +117,23 @@ public class Cinematica extends ApplicationAdapter {
                                         RenderizadorAgente.RAIO),
                                 clique);
                     }
-                    if (definiuObjetivo) {
-                        objetivo.setObjetivo(atual);
-                    } // passo 2: se não tiver acertado um agente, define o 
+                    if (definiuObjetivo)
+                        objetivo.setObjetivo(atual); // passo 2: se não tiver acertado um agente, define o 
                     // objetivo no mapa                    
-                    else {
+                    else
                         objetivo.setObjetivo(clique);
-                    }
                 } // Botão ESQUERDO: novo agente
-                else if (button == Buttons.LEFT) {
+                else if (button == Buttons.LEFT)
                     novoAgente(clique);
-                }
                 return true;
             }
 
             @Override
-            public boolean scrolled(int quanto) {
+            public boolean scrolled(int quanto)
+            {
                 // faz um zoom na câmera
-                if (camera.zoom + quanto < 0) {
+                if (camera.zoom + quanto < 0)
                     return true;
-                }
                 camera.zoom += quanto / FATOR_ZOOM_A_CADA_SCROLL;
                 camera.update();
                 viewport.setWorldSize(
@@ -142,18 +143,18 @@ public class Cinematica extends ApplicationAdapter {
             }
 
             @Override
-            public boolean keyUp(int keycode) {
+            public boolean keyUp(int keycode)
+            {
                 // verifica se pressionaram uma tecla referente a um algoritmo
                 // nesse caso, torna ele o algoritmo ativo para se criar novos
                 // agentes
-                for (AlgoritmoMovimentacao algoritmo : algoritmos) {
+                for (AlgoritmoMovimentacao algoritmo : algoritmos)
                     if (keycode == algoritmo.getTeclaParaAtivacao()) {
                         algoritmoCorrente = algoritmo;
                         stringAlgoritmoCorrente = "Algoritmo corrente: "
                                 + algoritmo.getNome();
                         return true;
                     }
-                }
                 // teclas gerais
                 switch (keycode) {
                     case Keys.ESCAPE:
@@ -166,7 +167,8 @@ public class Cinematica extends ApplicationAdapter {
     }
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
         renderizador.dispose();
         renderizadorObjetivo.dispose();
     }
@@ -178,32 +180,31 @@ public class Cinematica extends ApplicationAdapter {
      * @param h Altura da janela.
      */
     @Override
-    public void resize(int w, int h) {
+    public void resize(int w, int h)
+    {
         viewport.update(w, h);
     }
 
     /**
-     * Faz com que o mundo seja infinito. Quando um agente chega ao final do
-     * mundo (1 dos 4 cantos), ele é teleportado para o outro lado.
+     * Faz com que o mundo seja infinito. Quando um agente chega ao final do mundo (1 dos 4 cantos), ele é teleportado para o outro lado.
      *
      * @param agente Agente
      */
-    private void revolveCoordenadas(Agente agente) {
+    private void revolveCoordenadas(Agente agente)
+    {
         float larguraMundo = viewport.getWorldWidth();
         float alturaMundo = viewport.getWorldHeight();
         float larguraMundo_2 = larguraMundo / 2.0f;
         float alturaMundo_2 = alturaMundo / 2.0f;
 
-        if (agente.pose.posicao.x < -larguraMundo_2) {
+        if (agente.pose.posicao.x < -larguraMundo_2)
             agente.pose.posicao.x += larguraMundo;
-        } else if (agente.pose.posicao.x > larguraMundo_2) {
+        else if (agente.pose.posicao.x > larguraMundo_2)
             agente.pose.posicao.x -= larguraMundo;
-        }
-        if (agente.pose.posicao.y < -alturaMundo_2) {
+        if (agente.pose.posicao.y < -alturaMundo_2)
             agente.pose.posicao.y += alturaMundo;
-        } else if (agente.pose.posicao.y > alturaMundo_2) {
+        else if (agente.pose.posicao.y > alturaMundo_2)
             agente.pose.posicao.y -= alturaMundo;
-        }
     }
 
     /**
@@ -211,7 +212,8 @@ public class Cinematica extends ApplicationAdapter {
      *
      * @param delta tempo desde a última atualização.
      */
-    private void atualizaAgentes(float delta) {
+    private void atualizaAgentes(float delta)
+    {
 
         // percorre a lista de agentes e os atualiza (agente.atualiza)
         for (Agente agente : agentes) {
@@ -223,20 +225,19 @@ public class Cinematica extends ApplicationAdapter {
     }
 
     /**
-     * Percorre a lista de agentes, renderizando-os. Também invoca um método
-     * (atualizaAgentes) para atualização da lógica de movimentação.
+     * Percorre a lista de agentes, renderizando-os. Também invoca um método (atualizaAgentes) para atualização da lógica de movimentação.
      */
     @Override
-    public void render() {
+    public void render()
+    {
         // limpa a tela
         Gdx.gl.glClearColor(0.8f, 0.8f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // desenha os agentes
         batch.setProjectionMatrix(camera.combined);
-        for (Agente agente : agentes) {
+        for (Agente agente : agentes)
             renderizador.desenha(agente);
-        }
 
         // desenha o objetivo
         renderizadorObjetivo.desenha(objetivo);
@@ -250,7 +251,7 @@ public class Cinematica extends ApplicationAdapter {
 
         batch.begin();
         fonte.draw(batch, stringAlgoritmoCorrente,
-                -viewport.getWorldWidth() / 2, 
+                -viewport.getWorldWidth() / 2,
                 -viewport.getWorldHeight() / 2 + 15);
         batch.end();
     }
@@ -261,7 +262,8 @@ public class Cinematica extends ApplicationAdapter {
      * @param posicao
      * @return
      */
-    public Agente novoAgente(Vector3 posicao) {
+    public Agente novoAgente(Vector3 posicao)
+    {
         Agente agente = new Agente(posicao,
                 new Color(
                         (float) Math.random(),
@@ -279,7 +281,8 @@ public class Cinematica extends ApplicationAdapter {
      *
      * @return
      */
-    private Vector3 posicaoAleatoria() {
+    private Vector3 posicaoAleatoria()
+    {
         Vector3 posicao = new Vector3();
         posicao.x = camera.viewportWidth * (float) (Math.random() - 0.5f);
         posicao.y = camera.viewportHeight * (float) (Math.random() - 0.5f);
