@@ -17,13 +17,12 @@ public class Chegar extends AlgoritmoMovimentacao {
     private static final double radius = 0.25;
     private static final float timeToTarget = 1/4;  
 
-    public Chegar(float maxVelocidade) {
-        this(NOME, maxVelocidade);
+    public Chegar() {
+        this(NOME);
     }
 
-    protected Chegar(char nome, float maxVelocidade) {
+    protected Chegar(char nome) {
         super(nome);
-        this.maxVelocidade = maxVelocidade;
     }
 
     @Override

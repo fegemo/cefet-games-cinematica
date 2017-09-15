@@ -31,6 +31,9 @@ public class Buscar extends AlgoritmoMovimentacao {
         output.velocidade = super.alvo.getObjetivo().sub(agente.posicao);
         output.velocidade.nor();
         output.velocidade.mulAdd(output.velocidade, this.maxVelocidade);
+        
+        agente.olharNaDirecaoDaVelocidade(output.velocidade);
+        output.rotacao = 0;
         // calcula que direção tomar (configura um objeto Direcionamento 
         // e o retorna)
         // ...
