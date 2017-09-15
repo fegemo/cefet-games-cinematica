@@ -11,40 +11,45 @@ import com.badlogic.gdx.Input.Keys;
  *
  * @author Flávio Coutinho <fegemo@cefetmg.br>
  */
-public class Buscar extends AlgoritmoMovimentacao {
+public class Chegar extends AlgoritmoMovimentacao {
 
-    private static final char NOME = 's';
+    private static final char NOME = 'c';
+    private static final double radius = 0.25;
+    private static final float timeToTarget = 2;  
 
-    public Buscar(float maxVelocidade) {
+    public Chegar(float maxVelocidade) {
         this(NOME, maxVelocidade);
     }
 
-    protected Buscar(char nome, float maxVelocidade) {
+    protected Chegar(char nome, float maxVelocidade) {
         super(nome);
         this.maxVelocidade = maxVelocidade;
     }
 
     @Override
-    public Direcionamento guiar(Pose agente) {
+    public Direcionamento guiar(Pose agente) { //TO-DO: Invocar Chegar 
         Direcionamento output = new Direcionamento();
 
         output.velocidade = super.alvo.getObjetivo().sub(agente.posicao);
-        output.velocidade.nor();
-        output.velocidade.mulAdd(output.velocidade, this.maxVelocidade);
+        
+        if (output.velocidade.len() < this.radius)
+            return null;
+        
+        output.velocidade.mulAdd(output.velocidade, 1/timeToTarget);
+        
+        if (output.velocidade.len() > this.maxVelocidade) {
+            output.velocidade.nor();
+            output.velocidade.mulAdd(output.velocidade, maxVelocidade);
+        }            
         
         agente.olharNaDirecaoDaVelocidade(output.velocidade);
         output.rotacao = 0;
-        // calcula que direção tomar (configura um objeto Direcionamento 
-        // e o retorna)
-        // ...
-        // super.alvo já contém a posição do alvo
-        // agente (parâmetro) é a pose do agente que estamos guiando
-        // ...
+        
         return output;
     }
 
     @Override
     public int getTeclaParaAtivacao() {
-        return Keys.S;
+        return Keys.C;
     }
 }
